@@ -1,0 +1,37 @@
+{
+  "model_name": "Logistic Regression",
+  "imbalance_strategy": "SMOTENC",
+  "smotenc_sampling_strategy": 0.5,
+  "threshold": 0.5,
+  "features": [
+    "age",
+    "gender",
+    "hypertension",
+    "heart_disease",
+    "ever_married",
+    "work_type",
+    "Residence_type",
+    "smoking_status"
+  ],
+  "numeric_features": [
+    "age"
+  ],
+  "categorical_features": [
+    "gender",
+    "ever_married",
+    "work_type",
+    "Residence_type",
+    "smoking_status"
+  ],
+  "binary_features": [
+    "hypertension",
+    "heart_disease"
+  ],
+  "target": "stroke",
+  "risk_categories": {
+    "low": "<0.30",
+    "moderate": "0.30-<0.50",
+    "high": ">=0.50"
+  },
+  "random_state": 42
+}

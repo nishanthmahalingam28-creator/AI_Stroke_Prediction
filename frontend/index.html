@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Stroke Risk Prediction — Screening Estimate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="eyebrow">Educational screening tool</p>
+      <h1 class="masthead__title">AI Stroke Risk Prediction</h1>
+      <p class="masthead__subtitle">Estimate your stroke risk using information you already know — no lab tests, no blood pressure cuff, no glucose reading required.</p>
+    </div>
+  </header>
+
+  <main class="stage">
+
+    <!-- ===================== FORM CARD ===================== -->
+    <section class="card" id="form-card" aria-labelledby="form-heading">
+      <h2 class="visually-hidden" id="form-heading">Stroke risk questionnaire</h2>
+
+      <div class="progress" role="progressbar" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1" aria-label="Questionnaire progress">
+        <div class="progress__track">
+          <div class="progress__fill" id="progress-fill"></div>
+        </div>
+        <p class="progress__label" id="progress-label">Step 1 of 8</p>
+      </div>
+
+      <form id="risk-form" novalidate>
+
+        <!-- STEP 1 — age -->
+        <fieldset class="step" data-step="1">
+          <legend class="step__question">What is your age?</legend>
+          <p class="step__helper">Enter your age in years.</p>
+          <div class="field">
+            <label for="field-age" class="visually-hidden">Age in years</label>
+            <input
+              type="number"
+              id="field-age"
+              name="age"
+              inputmode="numeric"
+              min="0"
+              max="120"
+              step="1"
+              placeholder="e.g. 45"
+              autocomplete="off"
+            />
+            <p class="field__error" id="error-age" role="alert" aria-live="polite"></p>
+          </div>
+        </fieldset>
+
+        <!-- STEP 2 — gender -->
+        <fieldset class="step" data-step="2">
+          <legend class="step__question">What is your gender?</legend>
+          <p class="step__helper">Choose the option that applies to you.</p>
+          <div class="field field--choices" id="group-gender">
+            <label class="choice">
+              <input type="radio" name="gender" value="Female" />
+              <span>Female</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="gender" value="Male" />
+              <span>Male</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="gender" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <p class="field__error" id="error-gender" role="alert" aria-live="polite"></p>
+        </fieldset>
+
+        <!-- STEP 3 — hypertension -->
+        <fieldset class="step" data-step="3">
+          <legend class="step__question">Have you ever been told by a doctor or healthcare professional that you have high blood pressure?</legend>
+          <p class="step__helper">High blood pressure is also called hypertension.</p>
+          <div class="field field--choices" id="group-hypertension">
+            <label class="choice">
+              <input type="radio" name="hypertension" value="1" />
+              <span>Yes</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="hypertension" value="0" />
+              <span>No</span>
+            </label>
+          </div>
+          <p class="field__error" id="error-hypertension" role="alert" aria-live="polite"></p>
+        </fieldset>
+
+        <!-- STEP 4 — heart disease -->
+        <fieldset class="step" data-step="4">
+          <legend class="step__question">Have you ever been diagnosed with heart disease?</legend>
+          <p class="step__helper">Include any condition a doctor has told you affects your heart.</p>
+          <div class="field field--choices" id="group-heart_disease">
+            <label class="choice">
+              <input type="radio" name="heart_disease" value="1" />
+              <span>Yes</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="heart_disease" value="0" />
+              <span>No</span>
+            </label>
+          </div>
+          <p class="field__error" id="error-heart_disease" role="alert" aria-live="polite"></p>
+        </fieldset>
+
+        <!-- STEP 5 — ever married -->
+        <fieldset class="step" data-step="5">
+          <legend class="step__question">Have you ever been married?</legend>
+          <p class="step__helper">This is one of the factors the model was trained on.</p>
+          <div class="field field--choices" id="group-ever_married">
+            <label class="choice">
+              <input type="radio" name="ever_married" value="Yes" />
+              <span>Yes</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="ever_married" value="No" />
+              <span>No</span>
+            </label>
+          </div>
+          <p class="field__error" id="error-ever_married" role="alert" aria-live="polite"></p>
+        </fieldset>
+
+        <!-- STEP 6 — work type -->
+        <fieldset class="step" data-step="6">
+          <legend class="step__question">What best describes your work?</legend>
+          <p class="step__helper">Choose the closest match.</p>
+          <div class="field field--choices field--choices-list" id="group-work_type">
+            <label class="choice">
+              <input type="radio" name="work_type" value="Private" />
+              <span>Private company / organization</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="work_type" value="Self-employed" />
+              <span>Self-employed</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="work_type" value="Govt_job" />
+              <span>Government job</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="work_type" value="children" />
+              <span>Student / child</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="work_type" value="Never_worked" />
+              <span>Never worked</span>
+            </label>
+          </div>
+          <p class="field__error" id="error-work_type" role="alert" aria-live="polite"></p>
+        </fieldset>
+
+        <!-- STEP 7 — residence type -->
+        <fieldset class="step" data-step="7">
+          <legend class="step__question">Where do you currently live?</legend>
+          <p class="step__helper">Choose whichever fits best.</p>
+          <div class="field field--choices" id="group-residence">
+            <label class="choice">
+              <input type="radio" name="Residence_type" value="Urban" />
+              <span>Urban / City</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="Residence_type" value="Rural" />
+              <span>Rural / Village</span>
+            </label>
+          </div>
+          <p class="field__error" id="error-Residence_type" role="alert" aria-live="polite"></p>
+        </fieldset>
+
+        <!-- STEP 8 — smoking status -->
+        <fieldset class="step" data-step="8">
+          <legend class="step__question">Which best describes your smoking history?</legend>
+          <p class="step__helper">Choose the closest match — it's fine to skip if you'd rather not say.</p>
+          <div class="field field--choices field--choices-list" id="group-smoking_status">
+            <label class="choice">
+              <input type="radio" name="smoking_status" value="never smoked" />
+              <span>Never smoked</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="smoking_status" value="formerly smoked" />
+              <span>Previously smoked</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="smoking_status" value="smokes" />
+              <span>Currently smokes</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="smoking_status" value="Unknown" />
+              <span>Prefer not to say / Unknown</span>
+            </label>
+          </div>
+          <p class="field__error" id="error-smoking_status" role="alert" aria-live="polite"></p>
+        </fieldset>
+
+        <p class="form__api-error" id="form-api-error" role="alert" aria-live="assertive"></p>
+
+        <div class="step-nav">
+          <button type="button" class="btn btn--ghost" id="btn-back">Back</button>
+          <button type="button" class="btn btn--primary" id="btn-next">Next</button>
+          <button type="submit" class="btn btn--primary" id="btn-submit" hidden>
+            <span class="btn__label">Check My Stroke Risk</span>
+            <span class="btn__spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <p class="loading-text" id="loading-text" role="status" aria-live="polite" hidden>Analyzing your information…</p>
+
+      </form>
+    </section>
+
+    <!-- ===================== RESULT CARD ===================== -->
+    <section class="card card--result" id="result-card" hidden aria-labelledby="result-heading">
+      <h2 class="result-heading" id="result-heading">Your stroke risk estimate</h2>
+
+      <div class="gauge" id="gauge">
+        <svg viewBox="0 0 240 140" class="gauge__svg" aria-hidden="true">
+          <path class="gauge__track" d="M 20 130 A 100 100 0 0 1 220 130" />
+          <path class="gauge__arc" id="gauge-arc" d="M 20 130 A 100 100 0 0 1 220 130" />
+          <line class="gauge__tick" x1="79.8" y1="46.2" x2="73.8" y2="36.6" />
+          <line class="gauge__tick" x1="120" y1="30" x2="120" y2="18" />
+        </svg>
+        <div class="gauge__readout">
+          <span class="gauge__percentage" id="result-percentage">—</span>
+          <span class="gauge__caption">estimated model score</span>
+        </div>
+      </div>
+
+      <p class="result-category" id="result-category">—</p>
+      <p class="result-class" id="result-class">—</p>
+
+      <p class="result-copy">
+        Based on the information you entered, the machine-learning model produced this estimate.
+        It reflects statistical patterns in historical data, not a clinical assessment of you personally.
+      </p>
+
+      <button type="button" class="btn btn--primary" id="btn-restart">Start Again</button>
+    </section>
+
+  </main>
+
+  <footer class="disclaimer">
+    <p>
+      <strong>Disclaimer:</strong> This tool is an educational stroke-risk screening prototype and is not a medical diagnosis.
+      It should not replace advice from a qualified healthcare professional.
+    </p>
+  </footer>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

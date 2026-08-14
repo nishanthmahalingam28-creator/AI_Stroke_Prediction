@@ -1,0 +1,29 @@
+{
+  "project_name": "AI-Based User-Friendly Stroke Risk Prediction System Using Machine Learning",
+  "model_name": "Logistic Regression",
+  "imbalance_strategy": "SMOTENC (sampling_strategy=0.5, applied to training data only)",
+  "features": [
+    "age",
+    "gender",
+    "hypertension",
+    "heart_disease",
+    "ever_married",
+    "work_type",
+    "Residence_type",
+    "smoking_status"
+  ],
+  "excluded_features": [
+    "id",
+    "bmi",
+    "avg_glucose_level"
+  ],
+  "target": "stroke",
+  "threshold": 0.5,
+  "risk_category_rules": {
+    "low": "<0.30",
+    "moderate": "0.30-<0.50",
+    "high": ">=0.50"
+  },
+  "random_state": 42,
+  "training_date": "2026-08-14"
+}
