@@ -1,0 +1,2 @@
+model,strategy,cv_mean_recall,cv_mean_precision,cv_mean_f1,cv_mean_roc_auc,test_accuracy,test_precision,test_recall,test_f1_score,test_roc_auc,test_specificity
+Logistic Regression,smotenc,0.5378205128205128,0.14535104004152613,0.22857146657317054,0.8197300462628225,0.8346379647749511,0.18848167539267016,0.72,0.2987551867219917,0.8392798353909465,0.8405349794238683
